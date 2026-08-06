@@ -22,6 +22,8 @@ public class UsuarioController {
 
     @GetMapping
     public List<Usuario> listarUsuarios() {
+        // retornar todos os valores da tabela
+        // usuario
         return repository.findAll();
     }
 }
