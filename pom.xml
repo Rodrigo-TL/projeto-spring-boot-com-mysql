@@ -15,8 +15,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>projeto-spring-boot-com-mysql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projeto-spring-boot-com-postgres</name>
-	<description>Projeto Spring Boot integrado com Neon PostgreSQL</description>
+	<name>projeto-spring-boot-com-mysql</name>
+	<description>API REST para gerenciamento de alunos e usuarios com Spring Boot, Spring Data JPA e MySQL</description>
 
 	<properties>
 		<java.version>21</java.version>
