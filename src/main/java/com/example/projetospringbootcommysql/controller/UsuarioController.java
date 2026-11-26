@@ -59,6 +59,18 @@ public class UsuarioController {
 
         return comandos.save(usuarioAtual);
     }
+    // DELETE - Excluir Usuario por ID
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarUsuario(@PathVariable Long id) {
+        UsuarioEntity usuario = comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario não encontrado"
+                ));
+
+        comandos.delete(usuario);
+    }
 }
 
 
