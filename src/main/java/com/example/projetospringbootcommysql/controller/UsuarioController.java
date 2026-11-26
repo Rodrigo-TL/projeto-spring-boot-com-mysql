@@ -5,7 +5,7 @@ import com.example.projetospringbootcommysql.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
@@ -40,13 +40,18 @@ public class UsuarioController {
             @PathVariable Long id,
             @RequestBody UsuarioEntity usuarioAtualizado) {
 
-        UsuarioEntity usuarioAtual = comandos.findById(id).orElseThrow();
+        UsuarioEntity usuarioAtual = comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario não encontrado"
+                ));
 
         usuarioAtual.setNome(usuarioAtualizado.getNome());
         usuarioAtual.setEmail(usuarioAtualizado.getEmail());
 
         return comandos.save(usuarioAtual);
     }
-
 }
+
+
 

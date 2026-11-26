@@ -33,7 +33,11 @@ public class AlunoController {
     // 3. PUT - Atualizar Aluno por ID
     @PutMapping("/{id}")
     public AlunoEntity atualizarAluno(@PathVariable Long id, @RequestBody AlunoEntity alunoAtualizado) {
-        AlunoEntity alunoAtual = comandos.findById(id).orElseThrow();
+        AlunoEntity alunoAtual = comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Aluno não encontrado"
+                ));
 
         alunoAtual.setNome(alunoAtualizado.getNome());
         alunoAtual.setIdade(alunoAtualizado.getIdade());
