@@ -4,6 +4,8 @@ import com.example.projetospringbootcommysql.entity.AlunoEntity;
 import com.example.projetospringbootcommysql.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -45,8 +47,14 @@ public class AlunoController {
 
     // 4. DELETE - Deletar Aluno por ID
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarAluno(@PathVariable Long id) {
-        AlunoEntity aluno = comandos.findById(id).orElseThrow();
+        AlunoEntity aluno = comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Aluno não encontrado"
+                ));
+
         comandos.delete(aluno);
     }
 }
