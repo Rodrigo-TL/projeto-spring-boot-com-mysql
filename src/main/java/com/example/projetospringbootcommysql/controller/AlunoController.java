@@ -19,6 +19,7 @@ public class AlunoController {
 
     // 1. POST - Cadastrar Aluno
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AlunoEntity cadastrarAluno(@RequestBody AlunoEntity novoAluno) {
         return comandos.save(novoAluno);
     }
