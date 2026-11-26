@@ -34,7 +34,15 @@ public class UsuarioController {
         return comandos.findAll();
         // SELECT * FROM usuario_entity;
     }
-
+    // GET - Buscar Usuario por ID
+    @GetMapping("/{id}")
+    public UsuarioEntity buscarUsuarioPorId(@PathVariable Long id) {
+        return comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuario não encontrado"
+                ));
+    }
     @PutMapping("/{id}")
     public UsuarioEntity atualizarUsuario(
             @PathVariable Long id,
