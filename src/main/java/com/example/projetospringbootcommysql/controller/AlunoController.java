@@ -30,6 +30,15 @@ public class AlunoController {
         return comandos.findAll();
     }
 
+    // GET - Buscar Aluno por ID
+    @GetMapping("/{id}")
+    public AlunoEntity buscarAlunoPorId(@PathVariable Long id) {
+        return comandos.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Aluno não encontrado"
+                ));
+    }
     // 3. PUT - Atualizar Aluno por ID
     @PutMapping("/{id}")
     public AlunoEntity atualizarAluno(@PathVariable Long id, @RequestBody AlunoEntity alunoAtualizado) {
